@@ -135,17 +135,17 @@ st.markdown("""
 BASE_DIR = Path(__file__).resolve().parent
 
 # Primary relative paths
-DATA_PATH = Path("data/north_india_weather_feature_engineered.csv")
+DATA_PATH = Path("Data/north_india_weather_feature_engineered.csv")
 MODEL_PATH = Path("models/baseline_logistic_regression.joblib")
 
 # Multi-environment fallback relative to script directory
 if not DATA_PATH.exists():
-    if (BASE_DIR / "data" / "north_india_weather_feature_engineered.csv").exists():
-        DATA_PATH = BASE_DIR / "data" / "north_india_weather_feature_engineered.csv"
+    if (BASE_DIR / "Data" / "north_india_weather_feature_engineered.csv").exists():
+        DATA_PATH = BASE_DIR / "Data" / "north_india_weather_feature_engineered.csv"
     elif (BASE_DIR / "cleaned_data" / "north_india_weather_feature_engineered.csv").exists():
         DATA_PATH = BASE_DIR / "cleaned_data" / "north_india_weather_feature_engineered.csv"
-    elif (BASE_DIR.parent.parent / "data" / "north_india_weather_feature_engineered.csv").exists():
-        DATA_PATH = BASE_DIR.parent.parent / "data" / "north_india_weather_feature_engineered.csv"
+    elif (BASE_DIR.parent.parent / "Data" / "north_india_weather_feature_engineered.csv").exists():
+        DATA_PATH = BASE_DIR.parent.parent / "Data" / "north_india_weather_feature_engineered.csv"
 
 if not MODEL_PATH.exists():
     if (BASE_DIR / "models" / "baseline_logistic_regression.joblib").exists():
@@ -156,7 +156,7 @@ if not MODEL_PATH.exists():
 @st.cache_data
 def load_dataset():
     if not DATA_PATH.exists():
-        st.error(f"Dataset not found at {DATA_PATH}. Please verify that 'data/north_india_weather_feature_engineered.csv' exists.")
+        st.error(f"Dataset not found at {DATA_PATH}. Please verify that 'Data/north_india_weather_feature_engineered.csv' exists.")
         st.stop()
     df = pd.read_csv(DATA_PATH)
     df['date_of_record'] = pd.to_datetime(df['date_of_record'], dayfirst=True)
